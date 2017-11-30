@@ -124,10 +124,9 @@ if t_size = 0
 return
 end
 rem---need here code to check if the previous frame is sent before send the next
-rem rest = sportTelemetrySend()
-rem if rest = 0 
-rem return 
-rem end
+rest = sportTelemetrySend(0xFF)
+return 
+end
 
 j=1
 while j<=6
