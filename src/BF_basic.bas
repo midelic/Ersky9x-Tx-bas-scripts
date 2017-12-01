@@ -332,10 +332,6 @@ if cmd = 0
 return
 end
 
- if mspRxIdx < 2 
-return
-end
-
 page = currentPage
 gosub SetupPages
 
