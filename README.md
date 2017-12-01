@@ -24,4 +24,4 @@ How to install:
 4. Run the script by pressing **Menu** button  long.
 
 ## Scripts
-1. Change Betaflight PID/Rates.Atm working only reading PID/Rates.Tested with 9xpro with last ersky9X firmware and multi STM32 module with custom firmware for sport bidirectional communication.
+1. Change Betaflight PID/Rates.Tested with 9xpro with last ersky9X firmware and multi STM32 module with custom firmware for sport bidirectional communication.

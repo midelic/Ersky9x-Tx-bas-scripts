@@ -347,15 +347,7 @@ rem ---ignore write for now
 
  if cmd = MSP_EEPROM_WRITE
      gState = PAGE_DISPLAY
-     j = 1
- 	  while j <= packet_size
-	  if page = 1
-	  values_pid[j] = 0
-	  else
- 	  values_rates[j] = 0
-	  end
- 	  j += 1
- 	  end
+     gosub empty_buffer
      saveTS = 0
  end
 
@@ -377,6 +369,18 @@ rem ---ignore write for now
  end
  ret = 0
  end
+return
+
+empty_buffer:
+      j = 1
+ 	  while j <= packet_size
+	  if page = 1
+	  values_pid[j] = 0
+	  else
+ 	  values_rates[j] = 0
+	  end
+ 	  j += 1
+ 	  end
 return
 
 payload_zero:
