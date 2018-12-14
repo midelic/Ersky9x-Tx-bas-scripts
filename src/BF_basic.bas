@@ -60,13 +60,13 @@ gState = PAGE_DISPLAY
 	mspOutOfOrder = 0
 	mspCRCErrors = 0
 	
-	array byte payload[7]
-	array byte payloadTx[7]
-	array byte payloadReq[32]
-	array byte values[32]
-	array byte values_pid[32]
-	array byte values_rates[32]
-	array byte value[32]
+	array  payload[7]
+	array  payloadTx[7]
+	array  payloadReq[32]
+	array  values[32]
+	array  values_pid[32]
+	array  values_rates[32]
+	array  value[32]
 	
     val = 0
 	lastReqTS = 0	
