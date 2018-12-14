@@ -40,7 +40,7 @@ gState = PAGE_DISPLAY
 
 	sportMspSeq = 0
 	sportMspRemoteSeq = 0
-    sportMspRemoteSeqm = 0
+	sportMspRemoteSeqm = 0
 	rem --- Rx values
 	array byte mspRxBuf[32]
 	mspRxIdx = 1
@@ -62,15 +62,15 @@ gState = PAGE_DISPLAY
 	mspOutOfOrder = 0
 	mspCRCErrors = 0
 	
-	array byte payload[7]
-	array byte payloadTx[7]
-	array byte payloadReq[32]
-	array byte values[32]
-	array byte values_pid[32]
-	array byte values_rates[32]
-	array byte values_vtx[32]
-	array byte values_vtx_rx[32]
-	array byte value[32]
+	array  payload[7]
+	array  payloadTx[7]
+	array  payloadReq[32]
+	array  values[32]
+	array  values_pid[32]
+	array  values_rates[32]
+	array  values_vtx[32]
+	array  values_vtx_rx[32]
+	array  value[32]
 	
     val = 0
 	lastReqTS = 0	
