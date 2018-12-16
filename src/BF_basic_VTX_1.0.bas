@@ -1,5 +1,5 @@
 rem ----By Midelic
-rem --- script to change PID&Rates
+rem --- script to change PID&Rates&VTX
 rem --- in betaflight using sport frames
 rem --- for TX using ersky9x firmware
 rem --- ported from betaflight TX LUA script to tiny basic language used by ersky9x
