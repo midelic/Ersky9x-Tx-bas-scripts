@@ -40,7 +40,7 @@ gState = PAGE_DISPLAY
 
 	sportMspSeq = 0
 	sportMspRemoteSeq = 0
-	sportMspRemoteSeqm = 0
+    sportMspRemoteSeqm = 0
 	rem --- Rx values
 	array byte mspRxBuf[32]
 	mspRxIdx = 1
@@ -62,14 +62,14 @@ gState = PAGE_DISPLAY
 	mspOutOfOrder = 0
 	mspCRCErrors = 0
 	
-	array  byte payload[7]
-	array  byte payloadTx[7]
-	array  byte payloadReq[32]
-	array  byte values[32]
-	array  byte values_pid[32]
-	array  byte values_rates[32]
-	array  byte values_vtx[32]
-	array  byte values_vtx_rx[32]
+	array byte payload[7]
+	array byte payloadTx[7]
+	array byte payloadReq[32]
+	array byte values[32]
+	array byte values_pid[32]
+	array byte values_rates[32]
+	array byte values_vtx[32]
+	array byte values_vtx_rx[32]
 
 	
     val = 0
@@ -81,7 +81,7 @@ gState = PAGE_DISPLAY
 	now = 0
 	seq = 0
 	ret = 0
-lastRunTS =0
+    lastRunTS =0
 end
 
 goto run
@@ -107,15 +107,15 @@ mspTxBuf[1] = p_size
 mspTxBuf[2] = cmnd & 0xFF
 
 if p_size > 1
-j=1
+j = 1
 while  j <= p_size
 mspTxBuf[j+2] = payloadReq[j]
-j=j+1
+j += 1
 end
 end
 
 mspLastReq = cmnd
-mspRequestsSent = mspRequestsSent + 1
+mspRequestsSent += 1
 t_size = p_size + 2
 gosub mspProcessTxQ
 return
@@ -135,7 +135,7 @@ end
 j = 1
 while j <= 6
 payloadTx[j] = 0
-j=j+1
+j += 1
 end
 
 mspRequestsSent = mspRequestsSent + 1
@@ -147,16 +147,16 @@ sportMspSeq = sportMspSeq & 0x0F
 	
   if mspTxIdx = 1 
   rem --- start flag only for id=1
-  payloadTx[1] = payloadTx[1] + SPORT_MSP_STARTFLAG
+  payloadTx[1] += SPORT_MSP_STARTFLAG
   end
 
  i = 2
   while i <= 6
   rem --- payloadTx[2]=payload size
    payloadTx[i] = mspTxBuf[mspTxIdx]
-    mspTxIdx = mspTxIdx + 1
+    mspTxIdx += 1
     mspTxCRC ^= payloadTx[i]
-    i = i + 1
+    i += 1
     if mspTxIdx > t_size
      goto break1
      end
@@ -167,11 +167,11 @@ break1:
 		
 if i <= 6 
 payloadTx[i] = mspTxCRC  
-      i = i + 1
+      i += 1
 	  rem --- zero fill
      while i <= 6 
      payloadTx[i] = 0
-      i = i + 1
+      i += 1
       end 	  
 gosub mspSendSport
 
@@ -179,7 +179,7 @@ rem ---reset buffer
 j = 1
 while j < 32
 mspTxBuf[j] = 0
-j = j + 1
+j += 1
 end
 t_size = 0
 mspTxIdx = 1
@@ -198,7 +198,7 @@ value = 0
 value = payloadTx[3] + payloadTx[4] * 256 + payloadTx[5] * 65536 + payloadTx[6] * 16777216
 reti = sportTelemetrySend(LOCAL_SENSOR_ID, REQUEST_FRAME_ID, dataId, value)
 if reti > 0 	
-mspTxPk = mspTxPk + 1
+mspTxPk += 1
 end
 return 
 
@@ -241,11 +241,11 @@ mspReceivedReply:
 	 j = 1
  	while j< 32
  	mspRxBuf[j]=0
- 	j = j+1
+ 	j += 1
  	end
 	
 	sportMspRemoteSeqm = sportMspRemoteseq + 1
-	sportMspRemoteSeqm = sportMspRemoteSeqm & 0x0F    
+	sportMspRemoteSeqm &= 0x0F    
 	mspRxIdx = 1
 		mspRxSize = payload[idx]
         mspRxCRC = mspRxSize ^ mspLastReq
@@ -298,8 +298,8 @@ while 1
 		 if result > 0		 
 			if (physicalId = 0x1B) & (primId = 0x32)
 				j=1
-				while j<=6
-				payload[j]=0				
+				while j <= 6
+				payload[j] = 0				
 				j = j+1
 				end
 					payload[1] = dataId & 0xFF
@@ -417,7 +417,7 @@ return
 
 
 incLine:
-currentLine = currentLine + 1
+currentLine += 1
 if currentLine > MaxLines 
       currentLine = 1
    elseif currentLine < 1 
@@ -426,7 +426,7 @@ end
 return 
 
 decLine:
-   currentLine = currentLine - 1
+   currentLine  -= 1
    if currentLine > MaxLines 
       currentLine = 1
    elseif currentLine < 1 
@@ -435,7 +435,7 @@ decLine:
 return
 
 incPage:
-currentPage = currentPage + 1
+currentPage += 1
  if currentPage > 3 
     currentPage = 1
    elseif currentPage < 1 
