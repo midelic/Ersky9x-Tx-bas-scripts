@@ -1,5 +1,5 @@
 rem ----By Midelic
-rem --- script to change PID&Rates&VTX
+rem --- script to change PID&Rates
 rem --- in betaflight using sport frames
 rem --- for TX using ersky9x firmware
 rem --- ported from betaflight TX LUA script to tiny basic language used by ersky9x
@@ -191,7 +191,7 @@ end
 j = 1
 while j <= 6
 payloadTx[j] = 0
-j=j+1
+j += 1
 end
 
 mspRequestsSent = mspRequestsSent + 1
@@ -203,16 +203,16 @@ sportMspSeq = sportMspSeq & 0x0F
 	
   if mspTxIdx = 1 
   rem --- start flag only for id=1
-  payloadTx[1] = payloadTx[1] + SPORT_MSP_STARTFLAG
+  payloadTx[1] += SPORT_MSP_STARTFLAG
   end
 
  i = 2
   while i <= 6
   rem --- payloadTx[2]=payload size
    payloadTx[i] = mspTxBuf[mspTxIdx]
-    mspTxIdx = mspTxIdx + 1
+    mspTxIdx += 1
     mspTxCRC ^= payloadTx[i]
-    i = i + 1
+    i += 1
     if mspTxIdx > t_size
      goto break1
      end
@@ -223,11 +223,11 @@ break1:
 		
 if i <= 6 
 payloadTx[i] = mspTxCRC  
-      i = i + 1
+      i += 1
 	  rem --- zero fill
      while i <= 6 
      payloadTx[i] = 0
-      i = i + 1
+      i += 1
       end 	  
 gosub mspSendSport
 
@@ -235,7 +235,7 @@ rem ---reset buffer
 j = 1
 while j < 32
 mspTxBuf[j] = 0
-j = j + 1
+j += 1
 end
 t_size = 0
 mspTxIdx = 1
@@ -254,7 +254,7 @@ value = 0
 value = payloadTx[3] + payloadTx[4] * 256 + payloadTx[5] * 65536 + payloadTx[6] * 16777216
 reti = sportTelemetrySend(LOCAL_SENSOR_ID, REQUEST_FRAME_ID, dataId, value)
 if reti > 0 	
-mspTxPk = mspTxPk + 1
+mspTxPk += 1
 end
 return 
 
@@ -297,7 +297,7 @@ mspReceivedReply:
 	 j = 1
  	while j< 32
  	mspRxBuf[j]=0
- 	j = j+1
+ 	j += 1
  	end
 	
 	sportMspRemoteSeqm = sportMspRemoteseq + 1
@@ -356,7 +356,7 @@ while 1
 				j=1
 				while j<=6
 				payload[j]=0				
-				j = j+1
+				j += 1
 				end
 					payload[1] = dataId & 0xFF
 					dataId /= 256					
@@ -520,7 +520,7 @@ return
 
 
 incLine:
-currentLine = currentLine + 1
+currentLine += 1
 if currentLine > MaxLines 
       currentLine = 1
    elseif currentLine < 1 
@@ -529,7 +529,7 @@ end
 return 
 
 decLine:
-   currentLine = currentLine - 1
+   currentLine -= 1
    if currentLine > MaxLines 
       currentLine = 1
    elseif currentLine < 1 
@@ -538,7 +538,7 @@ decLine:
 return
 
 incPage:
-currentPage = currentPage + 1
+currentPage += 1
  if currentPage > 3 
     currentPage = 1
    elseif currentPage < 1 
@@ -948,7 +948,7 @@ return
 
 
 incMenu:
-   menuActive = menuActive + 1
+   menuActive  += 1
    if menuActive > 3 
       menuActive = 1
    elseif menuActive < 1 then
@@ -957,7 +957,7 @@ incMenu:
 return
 
 decMenu:
-   menuActive = menuActive - 1
+   menuActive -= 1
    if menuActive > 3 
       menuActive = 1
    elseif menuActive < 1 then
@@ -1017,7 +1017,7 @@ gosub check_values
 	  gosub setFreqFromBandChan
 	   payloadReq[j] = values_vtx_send[j]
        end	  
-	  j = j+1
+	  j += 1
 	  end
       gosub mspSendRequest
 
