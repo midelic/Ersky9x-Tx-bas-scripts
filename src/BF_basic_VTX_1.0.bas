@@ -708,7 +708,7 @@ read = MSP_RC_TUNING
 write = MSP_SET_RC_TUNING
 
 elseif page = 3
-packet_size = 12
+packet_size = 9
 MaxLines = 6
 read = MSP_VTX_CONFIG
 write = MSP_VTX_SET_CONFIG
@@ -1000,7 +1000,9 @@ return
 
 saveSettings:
 rem --write commands
+if page = 3
 gosub convertVtxValuesSend
+end
 gosub check_values
    if v_flag
       cmnd = write
