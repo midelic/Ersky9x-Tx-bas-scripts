@@ -36,7 +36,7 @@ How to install:
 6. Button **LEFT** press is taking you on new screen used only for debugging.This is to be used only by advanced users that know how to modify the script source and configure the debugging test screen for their needs.
 
 ## Note:
-Added new script for confioguration of a DIY (JUMPER R8) frSky compatible receiver.
+Added new script DIY_RX_CFG.bas for configuration of a DIY (JUMPER R8) frSky compatible receiver.
 For more details about that see:
 https://www.rcgroups.com/forums/showthread.php?3420847-DIY-FrSky-X%28D16%29-receiver
 https://www.rcgroups.com/forums/showthread.php?3504875-Jumper-R8-Receiver-8-channel-PPM-16-channel-SBUS-D16-LBT-D8-compatible-firmware
