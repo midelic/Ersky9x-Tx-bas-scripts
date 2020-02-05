@@ -35,3 +35,38 @@ How to install:
 5. Button **EXIT** long press terminate the script running and you exit on general script screen.
 6. Button **LEFT** press is taking you on new screen used only for debugging.This is to be used only by advanced users that know how to modify the script source and configure the debugging test screen for their needs.
 
+## Note:
+Added new script for confioguration of a DIY (JUMPER R8) frSky compatible receiver.
+For more details about that see:
+https://www.rcgroups.com/forums/showthread.php?3420847-DIY-FrSky-X%28D16%29-receiver
+https://www.rcgroups.com/forums/showthread.php?3504875-Jumper-R8-Receiver-8-channel-PPM-16-channel-SBUS-D16-LBT-D8-compatible-firmware
+
+The configration modes are:
+1. Page 1: MODES
+
+1) receiver mode to X(D16)protocol channels 1-8 output PWM.
+2) receiver mode to X(D16)protocol channels 1-8 output PWM with no telemetry.
+3) receiver mode to X(D16)protocol channels 9-16 output PWM.
+4) receiver mode to X(D16)protocol channels 9-16 output PWM with no telemetry.
+5) receiver mode to D(D8)protocol (with Hub telemetry).
+6) receiver modeLBT protocol.
+7) receiver mode SBUS(inverted signal or not)-not implemented yet.
+8) receiver mode SPORT(inverted signal or not)-not tested.
+
+2. Page 2: STATISTICS
+
+1) DropPkt 
+2) Drop%
+3) TotCrcErr
+4) LbtBlks
+5) PktErr
+
+
+
+
+
+
+
+
+
+
