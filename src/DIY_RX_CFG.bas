@@ -788,6 +788,9 @@ elseif gState = PAGE_DISPLAY
 gosub drawScreen
 elseif  gState = EDITING
 gosub drawScreen
+if Event = EVT_LEFT_FIRST
+gState = PAGE_DISPLAY
+end
 end
 
 if Event = EVT_EXIT_BREAK
