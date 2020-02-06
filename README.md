@@ -43,8 +43,8 @@ For more details about that see:
 https://www.rcgroups.com/forums/showthread.php?3420847-DIY-FrSky-X%28D16%29-receiver
 https://www.rcgroups.com/forums/showthread.php?3504875-Jumper-R8-Receiver-8-channel-PPM-16-channel-SBUS-D16-LBT-D8-compatible-firmware
 
-The configration modes are:
-1. **Page 1: MODES**
+The configuration modes are:
+ **Page 1: RX-MODES**
 
 1) receiver mode to X(D16)protocol channels 1-8 output PWM.
 2) receiver mode to X(D16)protocol channels 1-8 output PWM with no telemetry.
@@ -56,7 +56,7 @@ The configration modes are:
 8) receiver mode SBUS(inverted signal or not)-not implemented yet.
 9) receiver mode SPORT(inverted signal or not)-not tested.
 
-2. **Page 2: STATISTICS**
+ **Page 2: STATISTICS**
 
 1) DropPkt 
 2) Drop%
