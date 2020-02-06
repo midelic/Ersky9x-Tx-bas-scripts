@@ -50,8 +50,9 @@ The configration modes are:
 4) receiver mode to X(D16)protocol channels 9-16 output PWM with no telemetry.
 5) receiver mode to D(D8)protocol (with Hub telemetry).
 6) receiver mode to LBT protocol.
-7) receiver mode SBUS(inverted signal or not)-not implemented yet.
-8) receiver mode SPORT(inverted signal or not)-not tested.
+7) receiver mode for servo rate(selection- 22500;18000;9000)-at the moment 9000 is not implemented yet
+8) receiver mode SBUS(inverted signal or not)-not implemented yet.
+9) receiver mode SPORT(inverted signal or not)-not tested.
 
 2. **Page 2: STATISTICS**
 
