@@ -457,8 +457,8 @@ elseif val >225
 val = 225	  
 end
 elseif z = 4
-if val > 3
-val = 3
+if val > 2
+val = 2
 end	  
 elseif z = 5
 if val > 3
