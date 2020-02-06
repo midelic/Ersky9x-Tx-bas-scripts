@@ -776,14 +776,14 @@ end
 if gState = MENU_DISP
 values_mod = 0
 if getvalue("RSSI") != 0 
-drawtext(10, 55, "Press right to send", BLINK)
+drawtext(8, 55, "Press right to send", BLINK)
 end
 gosub  drawMenu
 elseif gState = PAGE_SAVING
 drawrectangle(12,12,104,22)
 drawtext(16,22,"Saving...",DBLSIZE + BLINK)
 drawtext(16,40,"Turn Tx OFF", BLINK)
-drawtext(1,50,"When saving completed ", BLINK)
+drawtext(1,50,"When saving completed", BLINK)
 elseif gState = PAGE_DISPLAY
 gosub drawScreen
 elseif  gState = EDITING
