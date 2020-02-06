@@ -71,4 +71,3 @@ The configuration modes are:
 4. Button  **MENU** long press enters in new  menu(saving) with 2 options **save page** and **reload**. Select one of the options by pressing **UP** and **DOWN** button.Press **RIGHT** button to run the selected mode.
 **save page** as the name implied send commands for  saving the new page values to betaflight and **reload** commands for retrieving the values from betaflight.
 5. Button **EXIT** long press terminate the script running and you exit on general script screen.
-6. Button **LEFT** press is taking you on new screen used only for debugging.This is to be used only by advanced users that know how to modify the script source and configure the debugging test screen for their needs.
