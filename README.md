@@ -62,7 +62,14 @@ The configration modes are:
 4) LbtBlks
 5) PktErr
 
-
+## How to use:
+1. Button  **MENU** short press, change pages between RX-MODES page and Statistics.
+2. Button **UP** and **DOWN** move between fields/lines to select value for editing.
+3. Button **RIGHT** allow editing the page values the selected value will blink so you know you are on this mode.In this mode press button **UP** and **DOWN** increase /decrease values.Button **LEFT** short press close edititing mode blink will stop.
+4. Button  **MENU** long press enters in new  menu(saving) with 2 options **save page** and **reload**. Select one of the options by pressing **UP** and **DOWN** button.Press **RIGHT** button to run the selected mode.
+**save page** as the name implied send commands for  saving the new page values to betaflight and **reload** commands for retrieving the values from betaflight.
+5. Button **EXIT** long press terminate the script running and you exit on general script screen.
+6. Button **LEFT** press is taking you on new screen used only for debugging.This is to be used only by advanced users that know how to modify the script source and configure the debugging test screen for their needs.
 
 
 
