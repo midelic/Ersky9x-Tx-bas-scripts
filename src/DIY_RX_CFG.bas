@@ -117,10 +117,10 @@ end
 
 
 if p_size > 1
-j = 2
+j = 1
 p_size += 1
 while  j <= p_size
-cfgTxBuf[j] = payloadReq[j-1]
+cfgTxBuf[j+1] = payloadReq[j]
 j=j+1
 end
 end
@@ -181,7 +181,6 @@ end
 
 value = 0
 value = payloadTx[1] + payloadTx[2] * 256 + payloadTx[3] * 65536 + payloadTx[4] * 16777216
-rem = 0xE4+ modes*256 + servo*65536+(sbus+sport+protocol)* 16777216 
 reti = sportTelemetrySend(LOCAL_SENSOR_ID, REQUEST_FRAME_ID, DATA_ID, value)
 if reti > 0 	
 cfgTxPk = cfgTxPk + 1
