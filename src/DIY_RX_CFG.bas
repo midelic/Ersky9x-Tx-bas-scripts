@@ -59,7 +59,6 @@ cfgRequestsSent = 0
 cfgRepliesReceived = 0
 array byte payload[10]
 array byte payloadTx[10]
-array byte payloadReq[10]
 array byte values[10]
 array byte values_servo[5]	
 values_modes = 0
@@ -108,23 +107,6 @@ end
 
 cfgTxBuf[1] = cmd & 0xFF
 
-if page = 2
-if cfgTxPk > 0
-cmd = CFG_STATISTICS2
-cfgTxPk = 0
-end
-end
-
-
-if p_size > 1
-j = 1
-p_size += 1
-while  j <= p_size
-cfgTxBuf[j+1] = payloadReq[j]
-j=j+1
-end
-end
-
 cfgLastReq = cmd
 cfgRequestsSent += 1
 t_size = 1
@@ -151,19 +133,19 @@ j+=1
 end
 
 if p_size > 1
-if cfgTxBuf[2]<=4
+cfgTxBuf[2] = values_modes
+if cfgTxBuf[2] <= 4
 temp = 4 - cfgTxBuf[2]
 end
 n = 0
 v = 1
 while n <= temp
-v *=2
-n +=1
+v *= 2
+n += 1
 end
 cfgTxBuf[2]= v
-cfgTxBuf[5] *= 4
-cfgTxBuf[6] *= 16 
-cfgTxBuf[4] = cfgTxBuf[4]+cfgTxBuf[5]+cfgTxBuf[6]
+cfgTxBuf[3]= values_servo[k]
+cfgTxBuf[4] = values_sbus+ values_sport * 4 + values_proto *16
 end
 
 i = 1
@@ -171,7 +153,6 @@ while i <= 4
 payloadTx[i] = cfgTxBuf[i]
 i += 1
 end
-t_size = 0
 
 i = 1
 while i <= p_size
@@ -184,6 +165,7 @@ value = payloadTx[1] + payloadTx[2] * 256 + payloadTx[3] * 65536 + payloadTx[4] 
 reti = sportTelemetrySend(LOCAL_SENSOR_ID, REQUEST_FRAME_ID, DATA_ID, value)
 if reti > 0 	
 cfgTxPk = cfgTxPk + 1
+t_size = 0
 return 
 
 
@@ -242,8 +224,7 @@ gosub SetupPages
 rem if cmd = write
 if REQUEST_FRAME_ID = REQUEST_SET_FRAME_ID
 p_size = 0
-gosub payload_zero
-gosub empty_buffer
+rem gosub empty_buffer
 return
 end
 
@@ -272,7 +253,7 @@ values_proto = cfgRxBuf[4]
 if values_proto = 1
 values_modes = 0
 else
-values_modes = 1
+values_modes = n
 end
 
 if  cfgRxBuf[2] = 225
@@ -288,11 +269,14 @@ values_sport = (cfgRxBuf[3] & 0xF0)/16
 end
 
 elseif page = 2
-if cfgLastReq = CFG_STATISTICS2
+if cfgLastReq = CFG_STATISTICS
 values_statistics[1] = cfgRxBuf[1] + cfgRxBuf[2]*256
 values_statistics[2] = cfgRxBuf[3]
 values_statistics[3] = cfgRxBuf[4]
-elseif cfgLastReq = CFG_STATISTICS
+t_size = 0
+cmd = CFG_STATISTICS2
+gosub cfgSendRequest
+elseif cfgLastReq = CFG_STATISTICS2
 values_statistics[4] = cfgRxBuf[1] + cfgRxBuf[2]*256
 values_statistics[5] = cfgRxBuf[3] + cfgRxBuf[4]*256
 end
@@ -320,19 +304,10 @@ end
 end
 return
 
-payload_zero:
-j = 1
-while j <= 4
-payloadReq[j] = 0
-j += 1
-end
-return
-
 
 requestPage:
 if reqTS = 0
 reqTS = gettime()
-gosub payload_zero
 p_size = 0
 cmd = read
 REQUEST_FRAME_ID = 0x30
@@ -340,7 +315,6 @@ gosub  cfgSendRequest
 
 elseif reqTS + REQ_TIMEOUT <= gettime()
 reqTS = gettime()
-gosub payload_zero
 p_size = 0
 cmd = read
 REQUEST_FRAME_ID = 0x30
@@ -629,26 +603,8 @@ REQUEST_FRAME_ID = REQUEST_SET_FRAME_ID
 j = 1
 if page = 1
 p_size = packet_size
-payloadReq[j] = values_modes
-j += 1
-payloadReq[j] = values_servo[k]
-j += 1
-payloadReq[j] = values_sbus
-j += 1
-payloadReq[j] = values_sport
-j += 1	   
-payloadReq[j]= values_proto
-
-elseif page = 2
-p_size = 0
-while j <= 5
-payloadReq[j] = values_statistics[i]
-j += 1
-end
 end	  
-
 gosub cfgSendRequest
-
 saveTS = gettime()
 if gState = PAGE_SAVING 
 saveRetries = saveRetries + 1
