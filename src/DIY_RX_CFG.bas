@@ -155,7 +155,7 @@ i += 1
 end
 
 i = 1
-while i <= p_size
+while i <= (p_size+1)
 cfgTxBuf[i] = 0
 i += 1
 end
@@ -165,6 +165,7 @@ value = payloadTx[1] + payloadTx[2] * 256 + payloadTx[3] * 65536 + payloadTx[4] 
 reti = sportTelemetrySend(LOCAL_SENSOR_ID, REQUEST_FRAME_ID, DATA_ID, value)
 if reti > 0 	
 cfgTxPk = cfgTxPk + 1
+end
 t_size = 0
 return 
 
@@ -187,12 +188,17 @@ payload[2] = value & 0xFF
 value /= 256					
 payload[3] = value & 0xFF
 value /= 256
-payload[4] = value & 0xFF					
+payload[4] = value & 0xFF
+					
 gosub cfgReceivedReply
 if cfgRepliesReceived > 0
 return
 end
-end 				 
+
+else
+break
+end
+  				 
 end
 end
 break		
@@ -203,6 +209,11 @@ return
 cfgReceivedReply:
 idx = 1
 cfgRxIdx = 1
+i = 1
+while i<= 6
+cfgRxBuf[i] = 0
+i+=1
+end
 while cfgRxIdx <= 4
 cfgRxBuf[cfgRxIdx] = payload[idx]
 cfgRxIdx += 1
@@ -600,8 +611,8 @@ rem --write commands
 if v_flag
 cmd = write
 REQUEST_FRAME_ID = REQUEST_SET_FRAME_ID
-j = 1
 if page = 1
+j = 1
 p_size = packet_size
 end	  
 gosub cfgSendRequest
@@ -629,6 +640,7 @@ j+=1
 end
 gState = PAGE_DISPLAY
 saveTS = 0
+t_size = 0
 return
 
 
@@ -691,8 +703,10 @@ elseif Event = EVT_RIGHT_FIRST
 page = currentPage
 gosub SetupPages
 gosub check_values
+if page = 1
 if v_flag
 gState = EDITING
+end
 end
 end
 rem   -- editing value
