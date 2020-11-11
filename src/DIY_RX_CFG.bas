@@ -163,9 +163,6 @@ end
 value = 0
 value = payloadTx[1] + payloadTx[2] * 256 + payloadTx[3] * 65536 + payloadTx[4] * 16777216
 reti = sportTelemetrySend(LOCAL_SENSOR_ID, REQUEST_FRAME_ID, DATA_ID, value)
-if reti > 0 	
-cfgTxPk = cfgTxPk + 1
-end
 t_size = 0
 return 
 
@@ -232,10 +229,8 @@ end
 page = currentPage
 gosub SetupPages
 
-rem if cmd = write
 if REQUEST_FRAME_ID = REQUEST_SET_FRAME_ID
 p_size = 0
-rem gosub empty_buffer
 return
 end
 
@@ -297,25 +292,6 @@ end
 return
 
 
-
-
-empty_buffer:
-if page = 1
-values_modes = 0
-k = 0;
-values_sbus = 0
-values_proto = 0
-values_sport = 0 
-elseif page = 2
-i = 1
-while i <= 5 
-values_statistics[i] = 0
-i += 1
-end
-end
-return
-
-
 requestPage:
 if reqTS = 0
 reqTS = gettime()
@@ -369,20 +345,17 @@ page = currentPage
 z = currentLine
 if page = 1
 values[z] = values_page[z]
-rem end
 if z = 2
 k += 1
 else
 values[z] += 1
-end
 val = values[z]
+end
 gosub clipValue
-
+if z # 2
 values[z] = val
-
-
-rem if page = 1
 values_page[z] = values[z]
+end
 if z = 1
 values_modes = values_page[z]
 elseif z = 3
@@ -406,13 +379,14 @@ if z = 2
 k -= 1
 else
 values[z] -= 1
-end
 val = values[z]
-gosub clipValue
-values[z] = val
+end
 
-rem if page = 1
+gosub clipValue
+if z # 2
+values[z] = val
 values_page[z] = values[z]
+end
 if z = 1
 values_modes = values_page[z]
 elseif z = 3
@@ -429,12 +403,12 @@ clipValue:
 if val < 1 
 val = 1
 end
+if z = 2
 if k < 1
 k = 1
 elseif k > 3
 k = 3
 end
-if z = 2
 if val < 90
 val = 90
 elseif val >225 
