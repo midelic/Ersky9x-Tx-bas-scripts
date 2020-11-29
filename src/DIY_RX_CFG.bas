@@ -419,8 +419,8 @@ if val > 2
 val = 2
 end	  
 elseif z = 5
-if val > 3
-val = 3
+if val > 5
+val = 5
 end
 elseif z = 1
 if val > 4
@@ -488,6 +488,8 @@ if values_proto = 0 then drawtext(60, 54, "NS", text_options)
 if values_proto = 1 then drawtext(60, 54, "D8", text_options)
 if values_proto = 2 then drawtext(60, 54, "D16", text_options)
 if values_proto = 3 then drawtext(60, 54, "LBT", text_options)
+if values_proto = 4 then drawtext(60, 54, "D16V2", text_options)
+if values_proto = 5 then drawtext(60, 54, "LBTV2", text_options)
 
 elseif page = 2 
 drawtext( 0, 0, "Statistics", INVERS )
@@ -607,11 +609,6 @@ k = 0
 values_sbus = 0
 values_proto = 0
 values_sport = 0
-j=1
-while j < 6
-values_statistics[j] = 0
-j+=1
-end
 gState = PAGE_DISPLAY
 saveTS = 0
 t_size = 0
